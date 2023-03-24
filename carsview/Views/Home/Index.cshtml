@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null;
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+}
+<!doctype html>
+<html>
+<head>
+    <title>Id</title>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            background-color: #663399;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3e8e41;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>   
+    <div>
+       <div >
+        @foreach(var CarBrand in ViewBag.CarsBrand){
+
+            <h3>@CarBrand.Name</h3>
+            
+                @foreach(var CarModels in ViewBag.CarsBrandModel){
+                            if (CarModels.BrandId == CarBrand.IdBrands){
+                                if (!CarModels.Active){
+                                    <button> <a style="text-decoration:inherit; color:#808080" asp-action="Change" asp-route-id="@CarModels.IdModels">@CarModels.Name</a></button>
+                                }
+                                else{
+                                    <button> <a style="text-decoration:inherit; color:inherit" asp-action="Change" asp-route-id="@CarModels.IdModels">@CarModels.Name</a></button>
+                                }
+                                
+                            }
+                }
+
+        }
+       
+
+        <br/><br/><br/> <button> <a style="text-decoration:inherit; color:inherit" asp-controller="Home" asp-action="Change" >Добавить новую модель/марку</a> </button>
+    </div>
+
+    </div>
+
+</body> 
